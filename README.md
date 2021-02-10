@@ -421,6 +421,35 @@ scpを使う。
 TeraTermのウインドウメニュー`File→SSH SCP`に簡易的な機能がある。
 本格的にはWinSCPなどを使うと便利である。
 
+## noVNCは使えるか？
+VNCクライアントを使うことなくブラウザからアクセスできるnoVNCというOSSがある。
+下記の手順で対応できる。
+
+インストール
+```
+sudo apt install novnc
+```
+
+自動起動の設定
+```
+cat << EOF | sudo tee /etc/systemd/system/novnc.service
+[Unit]
+Description=noVNC Server
+After=multi-user.target network.target x11vnc.service
+
+[Service]
+Type=simple
+ExecStart=/usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable novnc.service
+sudo systemctl start novnc.service
+```
+
 # トラブルシューティング
 
 ## 突然、VNCを接続しようとするとエラーがでるようになった
