@@ -1,6 +1,7 @@
 # Change log
 - 2021/02/10
   - 作成
+  ‐ noVNCについて追記
 
 ![image](image/aws_ec2.jpg)
 
@@ -449,6 +450,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable novnc.service
 sudo systemctl start novnc.service
 ```
+
+TeraTermでポート番号`6080`のフォワーディングを設定し、
+
+http://localhost:6080/vnc.html
+
+にアクセスするとデスクトップが見える。
 
 # トラブルシューティング
 
